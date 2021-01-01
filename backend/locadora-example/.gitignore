@@ -1,3 +1,7 @@
+# Sensitive data
+key.json
+ormconfig.json
+
 # Logs
 logs
 *.log
