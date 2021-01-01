@@ -1,0 +1,5 @@
+{
+    "DB_KEY": "foo",
+    "DB_IV": "foo",
+    "JWT_SECRET": "foo"
+}
