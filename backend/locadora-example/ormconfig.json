@@ -2,9 +2,9 @@
   "type": "mysql",
   "host": "localhost",
   "port": 3306,
-  "username": "user",
-  "password": "password",
-  "database": "db",
+  "username": "root",
+  "password": "p00552830",
+  "database": "locadora",
   "synchronize": true,
   "entities": [
     "{src,dist}/models/*{.ts,.js}"

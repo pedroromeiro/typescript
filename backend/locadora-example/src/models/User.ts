@@ -7,10 +7,10 @@ import key from '../config/key.json';
 
 @Entity("user")
 export default class User {
-  @PrimaryGeneratedColumn({ type: "int", name: "id" })
+  @PrimaryGeneratedColumn()
   id: number;
 
-  @Column("varchar", { name: "name", length:255, transformer: new EncryptionTransformer({
+  @Column({transformer: new EncryptionTransformer({
     key: key.DB_KEY,
       algorithm: 'aes-256-cbc',
       ivLength: 16,
@@ -20,7 +20,7 @@ export default class User {
   @MaxLength(255, {message: "O nome deve conter no máximo 255 caracteres."})
   name: string;
 
-  @Column("varchar", { unique: true, name: "email", length:255, transformer: new EncryptionTransformer({
+  @Column({unique: true, transformer: new EncryptionTransformer({
     key: key.DB_KEY,
     algorithm: 'aes-256-cbc',
     ivLength: 16,
@@ -33,8 +33,7 @@ export default class User {
   @MaxLength(16, {message: "A senha deve conter no máximo 16 caracteres."})
 
   //a senha será encriptografada e entao salva no banco de dados
-  @Column("varchar", { name: "password", length:255,
-  transformer: new EncryptionTransformer({
+  @Column({transformer: new EncryptionTransformer({
     key: key.DB_KEY,
     algorithm: 'aes-256-cbc',
     ivLength: 16,

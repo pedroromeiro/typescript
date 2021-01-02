@@ -17,28 +17,28 @@ import  UserHasMovie  from "./UserHasMovie";
 @Index("FK_movie_director", ["idDirector"], {})
 @Entity("movie")
 export default class Movie {
-  @PrimaryGeneratedColumn({ type: "int", name: "id" })
+  @PrimaryGeneratedColumn()
   id: number;
 
-  @Column("int", { name: "id_category" })
+  @Column({ name: "id_category" })
   idCategory: number;
 
-  @Column("int", { name: "id_director" })
+  @Column({ name: "id_director" })
   idDirector: number;
 
-  @Column("varchar", { name: "picture_url", nullable: true, length: 255 })
-  pictureUrl: string | null;
+  @Column({ name: "picture_url", nullable: true})
+  pictureUrl: string;
 
-  @Column("varchar", { name: "title", length: 255 })
+  @Column()
   title: string;
 
-  @Column("varchar", { name: "description", length: 255 })
+  @Column()
   description: string;
 
-  @Column("year", { name: "year" })
+  @Column()
   year: number;
 
-  @Column("int", { name: "amount" })
+  @Column()
   amount: number;
 
   @UpdateDateColumn({ name: "updated_at"})

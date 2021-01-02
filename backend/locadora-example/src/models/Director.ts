@@ -3,10 +3,10 @@ import Movie from "./Movie";
 
 @Entity("director")
 export default class Director {
-  @PrimaryGeneratedColumn({ type: "int", name: "id" })
+  @PrimaryGeneratedColumn()
   id: number;
 
-  @Column("varchar", { name: "fullname", length: 255 })
+  @Column()
   fullname: string;
 
   @UpdateDateColumn({ name: "updated_at"})

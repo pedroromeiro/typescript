@@ -1,30 +1,30 @@
 import { Router } from 'express';
 import { getRepository, Like } from 'typeorm';
 import { auth } from '../middlewares/auth';
-import Category from '../models/Category';
+import Director from '../models/Director';
 import User from '../models/User';
 
-const categoryRouter = Router();
+const directorRouter = Router();
 
 
-categoryRouter.post('/', auth, async (request, response) => {
+directorRouter.post('/', auth, async (request, response) => {
   try {
-    const rep = getRepository(Category);
+    const rep = getRepository(Director);
     const userRep = getRepository(User);
 
     const user = await userRep.findOne((request.user as any).id);
     
 
-    const {description} = request.body
+    const {fullname} = request.body
 
-    const category = await rep.findOne({where:{ description }})
+    const director = await rep.findOne({where:{ fullname }})
 
-    //verifica se a categoria já existe
-    if(!category) {
+    //verifica se o diretor já existe
+    if(!director) {
       //verifica se o usuário que fez a requisição é um administrador
       if(user?.isAdministrator) {
 
-        const res = await rep.save({description});
+        const res = await rep.save({fullname});
         return response.status(201).json(res);
 
       } else {
@@ -42,11 +42,11 @@ categoryRouter.post('/', auth, async (request, response) => {
   }
 });
 
-categoryRouter.get('/', async (request, response) => {
+directorRouter.get('/', async (request, response) => {
   try {
-    const rep = getRepository(Category);
+    const rep = getRepository(Director);
 
-    const res = await rep.find({order:{description: "ASC"}});
+    const res = await rep.find({order:{fullname: "ASC"}});
     response.status(201).json(res);
   } catch (err) {
     console.log('err.message :>> ', err.message);
@@ -55,9 +55,9 @@ categoryRouter.get('/', async (request, response) => {
 });
 
 
-categoryRouter.delete('/:id', auth, async (request, response) => {
+directorRouter.delete('/:id', auth, async (request, response) => {
     try {
-      const rep = getRepository(Category);
+      const rep = getRepository(Director);
       const userRep = getRepository(User);
 
       const user = await userRep.findOne((request.user as any).id);
@@ -85,24 +85,24 @@ categoryRouter.delete('/:id', auth, async (request, response) => {
 
 
 
-categoryRouter.put('/:id', auth, async (request, response) => {
+directorRouter.put('/:id', auth, async (request, response) => {
   try {
-    const rep = getRepository(Category);
+    const rep = getRepository(Director);
     const userRep = getRepository(User);
 
     const user = await userRep.findOne((request.user as any).id);
     
 
-    const {description} = request.body
+    const {fullname} = request.body
 
-    const category = await rep.findOne(request.params.id);
+    const director = await rep.findOne(request.params.id);
 
     //verifica se a categoria já existe
-    if(category) {
+    if(director) {
       //verifica se o usuário que fez a requisição é um administrador
       if(user?.isAdministrator) {
-        rep.merge(category, {description});
-        const res = await rep.save(category);
+        rep.merge(director, {fullname});
+        const res = await rep.save(director);
         return response.status(201).json(res)
 
       } else {
@@ -120,12 +120,12 @@ categoryRouter.put('/:id', auth, async (request, response) => {
   }
 });
 
-categoryRouter.get('/:description', async (request, response) => {
+directorRouter.get('/:fullname', async (request, response) => {
   try {
-    const rep = getRepository(Category);
+    const rep = getRepository(Director);
 
     const res = await rep.find({where:{
-      description: Like(`${request.params.description}%`)
+      fullname: Like(`%${request.params.fullname}%`)
     }});
     response.status(201).json(res);
   } catch (err) {
@@ -134,4 +134,4 @@ categoryRouter.get('/:description', async (request, response) => {
   }
 });
 
-export default categoryRouter;
+export default directorRouter;

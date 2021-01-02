@@ -16,14 +16,14 @@ export default class UserHasMovie {
   @PrimaryGeneratedColumn({ type: "int", name: "id" })
   id: number;
 
-  @Column("int", { name: "id_movie" })
+  @Column({ name: "id_movie" })
   idMovie: number;
 
-  @Column("int", { name: "id_user" })
+  @Column({ name: "id_user" })
   idUser: number;
 
-  @Column("tinyint", { name: "returned", nullable: true, default: () => "'0'" })
-  returned: number | null;
+  @Column({default: () => false })
+  returned: boolean;
 
   @Column("timestamp", { name: "rented_at", default: () => "now()" })
   rentedAt: Date;
