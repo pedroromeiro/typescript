@@ -16,8 +16,6 @@ export default class User {
       ivLength: 16,
       iv: key.DB_IV
   })})
-  @MinLength(2, {message: "O nome deve conter no mínimo 2 caracteres."})
-  @MaxLength(255, {message: "O nome deve conter no máximo 255 caracteres."})
   name: string;
 
   @Column({unique: true, transformer: new EncryptionTransformer({
@@ -26,11 +24,8 @@ export default class User {
     ivLength: 16,
     iv: key.DB_IV
   })})
-  @IsEmail({},{message:"E-mail inválido"})
-  email: number;
+  email: string;
 
-  @MinLength(5, {message: "A senha deve conter no mínimo 5 caracteres."})
-  @MaxLength(16, {message: "A senha deve conter no máximo 16 caracteres."})
 
   //a senha será encriptografada e entao salva no banco de dados
   @Column({transformer: new EncryptionTransformer({

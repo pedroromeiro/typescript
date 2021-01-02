@@ -11,7 +11,7 @@ export default async(request: Request, response: Response, next: NextFunction) =
             //delete a senha, um dado muito sensível
             delete data['password']
             response.send = oldSend
-            return response.send(JSON.stringify(data))
+            return response.send(data)
         }
         
         next()

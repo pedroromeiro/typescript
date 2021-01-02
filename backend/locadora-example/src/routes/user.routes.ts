@@ -20,16 +20,23 @@ userRouter.post('/register', async (request, response) => {
     const err = await validate(user);
 
     if(err.length === 0) {
-      const res = await rep.save(user)
-      const token = jwt.sign({id: res.id}, config.JWT_SECRET)
-      return response.status(201).json({...user, password:undefined, jwt: token})
+      if(!await rep.findOne({where:{email: user.email}})) {
+        const res = await rep.save(user)
+        const token = jwt.sign({id: res.id}, config.JWT_SECRET)
+        return response.status(201).json({...user, password:undefined, jwt: token})
+      } else {
+        throw new Error("Esse e-mail já existe.")
+      }
+
+    } else {
+      return response.status(400).json({errors:err});
     }
 
-    return response.status(400).json({errors:err});
 
   } catch (err) {
-    console.log('err.message :>> ', err.message);
-    return response.status(400).send();
+    console.log('aaa')
+    console.log('err.message :>> ', err);
+    return response.status(400).json({message: err.message})
   }
 });
 
@@ -76,7 +83,7 @@ userRouter.delete('/:id', auth, async (request, response) => {
     }
   } catch (err) {
     console.log('err.message :>> ', err.message);
-    response.status(500).send();
+    response.status(500).json({});
   }
 });
 
@@ -130,8 +137,8 @@ userRouter.put('/:id', auth, async (request, response) => {
     }
     
   } catch (err) {
-    console.log('err.message :>> ', err.message);
-    response.status(400).send();
+    console.log('err.message :>> ', err);
+    response.status(400).json(err.message);
   }
 });
 

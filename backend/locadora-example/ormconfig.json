@@ -6,6 +6,7 @@
   "password": "123456",
   "database": "locadora",
   "synchronize": true,
+  "logging": true,
   "entities": [
     "{src,dist}/models/*{.ts,.js}"
  ],
