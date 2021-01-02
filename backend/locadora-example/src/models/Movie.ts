@@ -40,6 +40,7 @@ export default class Movie {
 
   @Column()
   amount: number;
+  //quantidade de títulos disponíveis para alugar
 
   @UpdateDateColumn({ name: "updated_at"})
   updatedAt: Date;

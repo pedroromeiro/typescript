@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import app from '../app';
 import deletePassword from '../middlewares/deletePassword';
 import categoryRouter from './category.routes';
+import directorRouter from './director.routes';
 import userRoute from './user.routes';
 
 const routes = Router();
@@ -12,5 +12,7 @@ const routes = Router();
 routes.use('/user', deletePassword, userRoute);
 
 routes.use('/category', categoryRouter);
+
+routes.use('/director', directorRouter);
 
 export default routes;
