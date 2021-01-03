@@ -38,7 +38,7 @@ directorRouter.post('/', auth, async (request, response) => {
 
   } catch (err) {
     console.log('err.message :>> ', err.message);
-    return response.status(400).send();
+    return response.status(400).json({});
   }
 });
 
@@ -47,10 +47,10 @@ directorRouter.get('/', async (request, response) => {
     const rep = getRepository(Director);
 
     const res = await rep.find({order:{fullname: "ASC"}});
-    response.status(201).json(res);
+    return response.status(200).json(res);
   } catch (err) {
     console.log('err.message :>> ', err.message);
-    response.status(500);
+    return response.status(500);
   }
 });
 
@@ -68,7 +68,7 @@ directorRouter.delete('/:id', auth, async (request, response) => {
     if(category) {
       //verifica se o usuário que fez a requisição é um administrador
       if(user?.isAdministrator) {
-        return response.status(201).json({message: "sucesso ao remover categoria",...await rep.remove(category)})
+        return response.status(200).json({message: "sucesso ao remover categoria",...await rep.remove(category)})
 
       } else {
         return response.status(401).json({message: "Você não tem autorização para realizar essa ação."});
@@ -79,7 +79,7 @@ directorRouter.delete('/:id', auth, async (request, response) => {
     }
     } catch (err) {
       console.log('err.message :>> ', err.message);
-      response.status(500);
+      return response.status(500);
     }
 });
 
@@ -103,7 +103,7 @@ directorRouter.put('/:id', auth, async (request, response) => {
       if(user?.isAdministrator) {
         rep.merge(director, {fullname});
         const res = await rep.save(director);
-        return response.status(201).json(res)
+        return response.status(200).json(res)
 
       } else {
         return response.status(401).json({message: "Você não tem autorização para realizar essa ação."});
@@ -116,7 +116,7 @@ directorRouter.put('/:id', auth, async (request, response) => {
 
   } catch (err) {
     console.log('err.message :>> ', err.message);
-    return response.status(400).send();
+    return response.status(400).json({});
   }
 });
 
@@ -127,10 +127,10 @@ directorRouter.get('/:fullname', async (request, response) => {
     const res = await rep.find({where:{
       fullname: Like(`%${request.params.fullname}%`)
     }});
-    response.status(201).json(res);
+    return response.status(200).json(res);
   } catch (err) {
     console.log('err.message :>> ', err.message);
-    response.status(500);
+    return response.status(500);
   }
 });
 

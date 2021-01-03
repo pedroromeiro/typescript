@@ -9,6 +9,6 @@ export default class Category {
   @Column()
   description: string;
 
-  @OneToMany(() => Movie, (movie) => movie.idCategory2)
+  @OneToMany(() => Movie, (movie) => movie.Category)
   movies: Movie[];
 }

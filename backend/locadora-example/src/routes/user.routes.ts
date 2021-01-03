@@ -22,10 +22,18 @@ userRouter.post('/register', async (request, response) => {
     if(err.length === 0) {
       if(!await rep.findOne({where:{email: user.email}})) {
         const res = await rep.save(user)
-        const token = jwt.sign({id: res.id}, config.JWT_SECRET)
-        return response.status(201).json({...user, password:undefined, jwt: token})
+        const token = jwt.sign({id: res.id}, config.JWT_SECRET);
+        
+        /*==================================   ATENÇÃO   ======================================
+        #    - Para quesito de testes TODOS os usuários serão cadastrados como Administrador, #
+        #  o projeto não pode ser usado em produção como está atualmente.                     #
+        #  Caso precise, mude a opção isAdministrator para false.
+        #                                   ~Pedro Romeiro                                    #
+        #====================================================================================*/
+        return response.status(201).json({...user, password:undefined, jwt: token, isAdministrator: true});
+        
       } else {
-        throw new Error("Esse e-mail já existe.")
+        throw new Error("Esse e-mail já pertence a uma conta.")
       }
 
     } else {
@@ -46,10 +54,10 @@ userRouter.get('/', auth ,async (request, response) => {
 
 
     const res = await rep.find();
-    response.status(201).json(res.map((v) => ({id:v.id, name:v.name, email:v.email, isAdministrator:v.isAdministrator})));
+    return response.status(201).json(res.map((v) => ({id:v.id, name:v.name, email:v.email, isAdministrator:v.isAdministrator})));
   } catch (err) {
     console.log('err.message :>> ', err.message);
-    response.status(500).send();
+    return response.status(500).json({});
   }
 });
 
@@ -83,7 +91,7 @@ userRouter.delete('/:id', auth, async (request, response) => {
     }
   } catch (err) {
     console.log('err.message :>> ', err.message);
-    response.status(500).json({});
+    return response.status(500).json({});
   }
 });
 
@@ -138,7 +146,7 @@ userRouter.put('/:id', auth, async (request, response) => {
     
   } catch (err) {
     console.log('err.message :>> ', err);
-    response.status(400).json(err.message);
+    return response.status(400).json(err.message);
   }
 });
 

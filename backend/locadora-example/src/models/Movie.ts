@@ -53,15 +53,15 @@ export default class Movie {
     onUpdate: "NO ACTION",
   })
   @JoinColumn([{ name: "id_category", referencedColumnName: "id" }])
-  idCategory2: Category;
+  Category: Category;
 
   @ManyToOne(() => Director, (director) => director.movies, {
     onDelete: "NO ACTION",
     onUpdate: "NO ACTION",
   })
   @JoinColumn([{ name: "id_director", referencedColumnName: "id" }])
-  idDirector2: Director;
+  Director: Director;
 
-  @OneToMany(() => UserHasMovie, (userHasMovie) => userHasMovie.idMovie2)
+  @OneToMany(() => UserHasMovie, (userHasMovie) => userHasMovie.Movie)
   userHasMovies: UserHasMovie[];
 }

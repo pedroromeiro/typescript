@@ -15,6 +15,6 @@ export default class Director {
   @CreateDateColumn({ name: "created_at" })
   createdAt: Date;
 
-  @OneToMany(() => Movie, (movie) => movie.idDirector2)
+  @OneToMany(() => Movie, (movie) => movie.Director)
   movies: Movie[];
 }

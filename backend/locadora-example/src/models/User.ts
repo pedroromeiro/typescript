@@ -1,6 +1,5 @@
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import UserHasMovie from "./UserHasMovie";
-import { IsEmail, MaxLength, MinLength } from 'class-validator';
 import { EncryptionTransformer } from "typeorm-encrypted";
 
 import key from '../config/key.json'; 
@@ -27,7 +26,7 @@ export default class User {
   email: string;
 
 
-  //a senha será encriptografada e entao salva no banco de dados
+  //a senha será encriptografada e então salva no banco de dados
   @Column({transformer: new EncryptionTransformer({
     key: key.DB_KEY,
     algorithm: 'aes-256-cbc',
@@ -45,6 +44,6 @@ export default class User {
   @CreateDateColumn({ name: "created_at" })
   createdAt: Date;
 
-  @OneToMany(() => UserHasMovie, (userHasMovie) => userHasMovie.idUser2)
+  @OneToMany(() => UserHasMovie, (userHasMovie) => userHasMovie.User)
   userHasMovies: UserHasMovie[];
 }

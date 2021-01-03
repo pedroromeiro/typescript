@@ -28,7 +28,7 @@ export default class UserHasMovie {
   @Column("timestamp", { name: "rented_at", default: () => "now()" })
   rentedAt: Date;
 
-  @Column("timestamp", { name: "returned_at", default: () => "now()", nullable: true })
+  @Column("timestamp", { name: "returned_at", nullable: true })
   returnedAt: Date | null;
 
   @ManyToOne(() => Movie, (movie) => movie.userHasMovies, {
@@ -36,12 +36,12 @@ export default class UserHasMovie {
     onUpdate: "NO ACTION",
   })
   @JoinColumn([{ name: "id_movie", referencedColumnName: "id" }])
-  idMovie2: Movie;
+  Movie: Movie;
 
   @ManyToOne(() => User, (user) => user.userHasMovies, {
     onDelete: "NO ACTION",
     onUpdate: "NO ACTION",
   })
   @JoinColumn([{ name: "id_user", referencedColumnName: "id" }])
-  idUser2: User;
+  User: User;
 }
