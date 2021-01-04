@@ -19,7 +19,7 @@ Projeto feito em NodeJS com Typescript e usando MySQL como banco de dados. Os da
   - [MySQL 8](https://dev.mysql.com/doc/relnotes/mysql/8.0/en/) - Banco de dados
   - [Typescript](https://www.typescriptlang.org/) - Linguagem (Javascript com tipagem)
   - [TypeORM](https://typeorm.io/#/) - ORM
-  - [ExpressJS](https://expressjs.com/pt-br/) - Servidor
+  - [ExpressJS](https://expressjs.com/pt-br/) - API framework
 
 ## EndPoints
 
