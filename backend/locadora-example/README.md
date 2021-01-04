@@ -744,12 +744,12 @@ GET /movie/renter/available
     ##### esse comando irá baixar todas as dependências necessárias para o funcionamento correto do projeto.
     <p>&nbsp;</p>
  
- Pronto, agora você deve configurar os dados de acesso para seu banco de dados no arquivo [ormconfig.json](/ormconfig.json) que se encontra na raíz do projeto. Instale o MySQL8 em sua máquina e coloque os dados de configuração de acesso ao banco de dados no arquivo mencionado.
+ Pronto, agora você deve configurar os dados de acesso para seu banco de dados no arquivo [ormconfig.json](./ormconfig.json) que se encontra na raíz do projeto. Instale o MySQL8 em sua máquina e coloque os dados de configuração de acesso ao banco de dados no arquivo mencionado.
 
 ### Popular Banco de Dados
- **Obs.:** Para facilitar o processo de popular o banco de dados foi disponibilizado [scripts](/sql) SQL para criação e inserção de registros no diretório ./sql. Isso tornará o processo mais ágil.
+ **Obs.:** Para facilitar o processo de popular o banco de dados foi disponibilizado [scripts](./sql) SQL para criação e inserção de registros no diretório ./sql. Isso tornará o processo mais ágil.
 
- Para garantir a segurança e a integridade dos dados altere as chaves de criptografia do Banco de Dados DB_KEY e DB_IV e a chave para geração do Json Web Token JWT_SECRET contidas no arquivo [key.json](/src/config/key.json) no diretório config dentro de src.
+ Para garantir a segurança e a integridade dos dados altere as chaves de criptografia do Banco de Dados DB_KEY e DB_IV e a chave para geração do Json Web Token JWT_SECRET contidas no arquivo [key.json](./src/config/key.json) no diretório config dentro de src.
 
  * Com a dependências e as configurações de acesso ao banco de dados prontas, para iniciar, o projeto você deve dar o comando:
     
