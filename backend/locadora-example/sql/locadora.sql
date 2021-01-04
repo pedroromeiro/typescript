@@ -159,6 +159,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 
+
 -- ----------------------------
 -- Table structure for user_has_movie
 -- ----------------------------

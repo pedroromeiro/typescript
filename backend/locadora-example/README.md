@@ -4,6 +4,8 @@ Projeto feito em NodeJS com Typescript e usando MySQL como banco de dados. Os da
 
 ## Guia
 * [Instalação e uso](#instalação-e-uso)
+  * [Popular BD](#popular-banco-de-dados)
+  * [Demo](#demo)
 * [Tecnologias](#tecnologias)
 * [Endpoints](#endpoints)
 	* [Usuário](#user)
@@ -53,6 +55,8 @@ POST /user/register/
 <p>&nbsp;</p>
 
 Fazer login:
+
+**Obs.:** Para efetuar logoff é só excluir o JWT armazenado no front-end, isso fará com que o usuário não tenha acesso aos dados que exigem autenticação.
 
 ```http
 POST /user/login/
@@ -742,6 +746,9 @@ GET /movie/renter/available
  
  Pronto, agora você deve configurar os dados de acesso para seu banco de dados no arquivo [ormconfig.json](/ormconfig.json) que se encontra na raíz do projeto. Instale o MySQL8 em sua máquina e coloque os dados de configuração de acesso ao banco de dados no arquivo mencionado.
 
+### Popular Banco de Dados
+ **Obs.:** Para facilitar o processo de popular o banco de dados foi disponibilizado [scripts](/sql) SQL para criação e inserção de registros no diretório ./sql. Isso tornará o processo mais ágil.
+
  Para garantir a segurança e a integridade dos dados altere as chaves de criptografia do Banco de Dados DB_KEY e DB_IV e a chave para geração do Json Web Token JWT_SECRET contidas no arquivo [key.json](/src/config/key.json) no diretório config dentro de src.
 
  * Com a dependências e as configurações de acesso ao banco de dados prontas, para iniciar, o projeto você deve dar o comando:
@@ -762,6 +769,17 @@ GET /movie/renter/available
     ```sh
     yarn build
     ```
+  ### Demo
+  Uma versão para demonstração do projeto foi hospedada em:
+  ```http
+    https://locadora-example.herokuapp.com/
+  ```
+  Você pode realizar testes mais facilmente por lá, exemplo:
+
+  ```http
+  GET https://locadora-example.herokuapp.com/movie
+  ```
+
 
 
 <p>&nbsp;</p>
