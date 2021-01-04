@@ -14,8 +14,8 @@ Projeto feito em NodeJS com Typescript e usando MySQL como banco de dados. Os da
 	* [Categoria](#category)
 	* [Diretor](#director)
 	* [Filmes](#movie)
-* [Criptografia](#criptografia-avançada-(AES))
-* [MER do BD](#modelo-entidade-relacionamento-(MER))
+* [Criptografia](#criptografia-avançada-AES)
+* [MER do BD](#modelo-entidade-relacionamento-MER)
 
 ## Tecnologias
   - [MySQL 8](https://dev.mysql.com/doc/relnotes/mysql/8.0/en/) - Banco de dados
