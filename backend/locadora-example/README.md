@@ -2,6 +2,8 @@
 
 Projeto feito em NodeJS com Typescript e usando MySQL como banco de dados. Os dados sensíveis são **protegidos** com **criptografia AES**.
 
+**Obs.:** O projeto foi feito com features adicionais, como por exemplo: criptografia AES, tabela adicional de categorias e uma tabela exclusiva para os diretores, com o intuito de facilitar futuros upgrades.
+
 ## Guia
 * [Instalação e uso](#instalação-e-uso)
   * [Popular BD](#popular-banco-de-dados)
