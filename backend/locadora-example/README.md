@@ -750,6 +750,8 @@ GET /movie/renter/available
 
 ### Popular Banco de Dados
  **Obs.:** Para facilitar o processo de popular o banco de dados foi disponibilizado [scripts](./sql) SQL para criação e inserção de registros no diretório ./sql. Isso tornará o processo mais ágil.
+ 
+ Além disso, com a opção **"synchronize":** true no arquivo [ormconfig.json](./ormconfig.json), toda a estrutura (somente a estrutura, não incluindo os dados) do banco de dados será criada automaticamente quando executar o projeto. Para desativar essa feature, mude o valor para **false**.
 
  Para garantir a segurança e a integridade dos dados altere as chaves de criptografia do Banco de Dados DB_KEY e DB_IV e a chave para geração do Json Web Token JWT_SECRET contidas no arquivo [key.json](./src/config/key.json) no diretório config dentro de src.
 
@@ -798,3 +800,10 @@ MySQL é o banco de dados desse projeto, usando typeORM como ORM (ferramente que
 
 ![MER](https://i.imgur.com/sYlVSJK.png)
 
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+Feito por: Pedro Romeiro.
+
+Liçensa: MIT.
