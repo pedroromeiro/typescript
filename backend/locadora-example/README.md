@@ -793,5 +793,6 @@ Todos os dados sensíveis que são salvos no banco de dados são criptografados,
 
 ## Modelo Entidade Relacionamento (MER)
 MySQL é o banco de dados desse projeto, usando typeORM como ORM (ferramente que ajuda de redução na impedância da programação utilizando banco de dados relacionais)
+
 ![MER](https://i.imgur.com/sYlVSJK.png)
 
