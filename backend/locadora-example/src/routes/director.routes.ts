@@ -32,7 +32,7 @@ directorRouter.post('/', auth, async (request, response) => {
       }
 
     } else {
-      return response.status(400).json({message: "Essa categoria já existe."});
+      return response.status(400).json({message: "Esse diretor já existe."});
     }
 
 
@@ -68,14 +68,14 @@ directorRouter.delete('/:id', auth, async (request, response) => {
     if(category) {
       //verifica se o usuário que fez a requisição é um administrador
       if(user?.isAdministrator) {
-        return response.status(200).json({message: "sucesso ao remover categoria",...await rep.remove(category)})
+        return response.status(200).json({message: "sucesso ao remover diretor",...await rep.remove(category)})
 
       } else {
         return response.status(401).json({message: "Você não tem autorização para realizar essa ação."});
       }
 
     } else {
-      return response.status(400).json({message: "Essa categoria não existe."});
+      return response.status(400).json({message: "Esse diretor não existe."});
     }
     } catch (err) {
       console.log('err.message :>> ', err.message);
@@ -110,7 +110,7 @@ directorRouter.put('/:id', auth, async (request, response) => {
       }
 
     } else {
-      return response.status(400).json({message: "Essa categoria não existe."});
+      return response.status(400).json({message: "Esse diretor não existe."});
     }
 
 

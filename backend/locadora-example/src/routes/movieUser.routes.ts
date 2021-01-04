@@ -23,6 +23,10 @@ movieUserRouter.post('/', auth, async (request, response) => {
     const movie = await movieRep.findOne(idMovie);
     const user = await userRep.findOne(idUser);
 
+    if(!user) {
+      return response.status(401).json({message: "Sem autorização."});
+    }
+
     const rentedMovies = await rep.count({where: {idMovie, returned: false, returnedAt: null}})
 
 
@@ -45,6 +49,43 @@ movieUserRouter.post('/', auth, async (request, response) => {
 
     response.status(201).json(res);
 
+  } catch (err) {
+    console.log('err.message :>> ', err.message);
+    return response.status(400).json({message: err.message});
+  }
+});
+
+movieUserRouter.get('/available', auth, async (request, response) => {
+  try {
+    const userRep = getRepository(User);
+    const movieRep = getRepository(Movie);
+    
+    const user = await userRep.findOne((request.user as any).id);
+    
+    if(!user) {
+      return response.status(401).json({message: "Sem autorização."})
+    }
+    var res : object[] = []
+
+    const rep = getRepository(UserHasMovie);
+    
+    const movies = await movieRep.find();
+
+    const pushRes = async (v: Movie) => {
+      const rentedMovies = await rep
+      .count({where: {idMovie: v.id, returned: false, returnedAt: null}, relations:['Movie', 'Movie.Category', 'Movie.Director']});
+      if(v.amount > rentedMovies) {
+        await res.push(v);
+      }
+    }
+
+    await Promise.all(
+      movies.map(pushRes)
+    );
+
+    return response.status(200).json(res);
+
+   
   } catch (err) {
     console.log('err.message :>> ', err.message);
     return response.status(400).json({message: err.message});
@@ -100,6 +141,7 @@ movieUserRouter.get('/:userId?', auth, async (request, response) => {
     return response.status(400).json({message: err.message});
   }
 });
+
 
 
 

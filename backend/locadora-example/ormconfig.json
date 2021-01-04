@@ -1,13 +1,14 @@
 {
   "type": "mysql",
-  "host": "localhost",
+  "host": "jhdjjtqo9w5bzq2t.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
   "port": 3306,
-  "username": "root",
-  "password": "123456",
-  "database": "locadora",
+  "username": "aq22kf8p4k05pr0q",
+  "password": "v734r4zzgpxaeefz",
+  "database": "tog3tfyrbr2t430s",
   "synchronize": true,
+  "logging":true,
   "entities": [
-    "{src,dist}/models/*{.ts,.js}"
+    "src/models/*{.ts,.js}"
  ],
  "migrations": [
   "src/database/migrations/**/*.ts"

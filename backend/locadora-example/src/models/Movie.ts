@@ -32,7 +32,7 @@ export default class Movie {
   @Column()
   title: string;
 
-  @Column()
+  @Column({type: "varchar", length:1000})
   description: string;
 
   @Column()

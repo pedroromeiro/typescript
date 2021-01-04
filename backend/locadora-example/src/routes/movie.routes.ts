@@ -38,7 +38,7 @@ movieRouter.post('/', auth, async (request, response) => {
     
         if(idDirector) {
             if(!await directorRep.findOne(idDirector)) {
-                throw new Error("Diretor não encontrada, insira um id válido.")
+                throw new Error("Diretor não encontrado, insira um id válido.")
             } 
         }
 

@@ -15,7 +15,7 @@ userRouter.post('/register', async (request, response) => {
 
     const {name, email, password} = request.body
 
-    const user = rep.create({name, email, password});
+    const user = rep.create({name, email, password, isAdministrator:true});
 
     const err = await validate(user);
 
@@ -25,12 +25,12 @@ userRouter.post('/register', async (request, response) => {
         const token = jwt.sign({id: res.id}, config.JWT_SECRET);
         
         /*==================================   ATENÇÃO   ======================================
-        #    - Para quesito de testes TODOS os usuários serão cadastrados como Administrador, #
+        #    - Para quesito de testes TODOS os usuários serão cadastrados como ADMINISTRADORES, #
         #  o projeto não pode ser usado em produção como está atualmente.                     #
         #  Caso precise, mude a opção isAdministrator para false.
         #                                   ~Pedro Romeiro                                    #
         #====================================================================================*/
-        return response.status(201).json({...user, password:undefined, jwt: token, isAdministrator: true});
+        return response.status(201).json({...user, password:undefined, jwt: token});
         
       } else {
         throw new Error("Esse e-mail já pertence a uma conta.")
@@ -48,13 +48,37 @@ userRouter.post('/register', async (request, response) => {
   }
 });
 
-userRouter.get('/', auth ,async (request, response) => {
+userRouter.get('/:id?', auth ,async (request, response) => {
   try {
     const rep = getRepository(User);
 
+    const userReq = await rep.findOne((request.user as any).id)
 
-    const res = await rep.find();
-    return response.status(201).json(res.map((v) => ({id:v.id, name:v.name, email:v.email, isAdministrator:v.isAdministrator})));
+    if(!userReq) {
+      return response.status(403).json({message: "Você não tem permissão."});
+    }
+    if(request.params.id) {
+      if(userReq.isAdministrator) {
+        const res = await rep.findOne(request.params.id);
+        if(res)
+        return response.status(201).json({id:res.id, name:res.name, email:res.email, isAdministrator:res.isAdministrator});
+      } else if (request.params.id == (request.user as any).id) {
+        const res = await rep.findOne((request.user as any).id);
+
+        if(res) return response.status(201)
+        .json({id:res.id, name:res.name, email:res.email, isAdministrator: res.isAdministrator});
+      }
+    } else {
+      if(userReq.isAdministrator) {
+        const res = await rep.find();
+        return response.status(201).json(res.map((v) => ({id:v.id, name:v.name, email:v.email, isAdministrator:v.isAdministrator})));
+      } else {
+        const res = await rep.findOne((request.user as any).id);
+        if(res) return response.status(201)
+        .json({id:res.id, name:res.name, email:res.email, isAdministrator: res.isAdministrator});
+      }
+    }
+    
   } catch (err) {
     console.log('err.message :>> ', err.message);
     return response.status(500).json({});
