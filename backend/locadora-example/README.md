@@ -474,7 +474,7 @@ GET /movie/:title (opcional)
 }
 ```
 
-se você não passar o parâmetro fullname terá todos os diretores retornados, exemplo:
+se você não passar o parâmetro title terá todos os diretores retornados, exemplo:
 
 ```javascript
 [
